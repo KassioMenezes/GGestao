@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="dashboard-nav-list">
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i> Página Inicial </a>
+        <a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i> Painel </a>
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Upload </a>
+        <div class="dashboard-nav-dropdown">
+            <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> Fornecedor </a>
+            <div class="dashboard-nav-dropdown-menu">
+                <a href="#" class="dashboard-nav-dropdown-item">Cadastro</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Relatório</a>
+            </div>
+        </div>
+        <div class="dashboard-nav-dropdown">
+            <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Cliente </a>
+            <div class="dashboard-nav-dropdown-menu">
+                <a href="#" class="dashboard-nav-dropdown-item">Cadastro</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Relatório</a>
+            </div>
+        </div>
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Configurações</a>
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Perfil </a>
+        <div class="nav-item-divider"></div>
+        <a href="/logout" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Sair </a>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <h1>Bem-vindo ao Menu</h1>
+
+        <!-- Mini Mapa -->
+        <div id="mini-mapa">
+            <h3>GGestão</h3>
+        </div>
+        <br>
+        
+        <!-- Exemplo de Cards com Lorem Ipsum -->
+        <div class="card">
+            <h2>Lorem Ipsum 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+        <div class="card">
+            <h2>Lorem Ipsum 2</h2>
+            <p>Suspendisse potenti. Morbi mattis ullamcorper velit. Phasellus gravida semper nisi. Nullam vel sem.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright - InfraDev © 2025 </p>
+    </footer>
+
+</body>
+</html>

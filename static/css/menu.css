@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Estilo da Navbar */
+.dashboard-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #001f3f; /* Azul */
+    color: #fff;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+}
+
+.dashboard-nav-item {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.dashboard-nav-item i {
+    margin-right: 10px;
+}
+
+.dashboard-nav-item:hover,
+.dashboard-nav-item.active {
+    background-color: #FF851B; /* Laranja */
+    color: #000;
+}
+
+.dashboard-nav-dropdown {
+    cursor: pointer;
+}
+
+.dashboard-nav-dropdown-menu {
+    display: none;
+    background-color: #0074D9; /* Azul mais claro */
+}
+
+.dashboard-nav-dropdown:hover .dashboard-nav-dropdown-menu {
+    display: block;
+}
+
+.dashboard-nav-dropdown-item {
+    padding: 10px 40px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+.dashboard-nav-dropdown-item:hover {
+    background-color: #FF851B; /* Laranja */
+}
+
+.nav-item-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+/* Estilo do conteúdo principal */
+main {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+/* Sombra em todos os elementos do corpo */
+.card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #001f3f; /* Azul */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Mini Mapa */
+#mini-mapa {
+    margin-top: 20px;
+    border: 2px solid #FF851B; /* Laranja */
+    padding: 10px;
+    background-color: #001f3f;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
