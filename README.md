@@ -103,13 +103,13 @@ Esse modelo pode ser ajustado conforme você desenvolve o projeto.
 
 # #Estrutura sistem
 
-/seu_projeto
+/GGestao
 │
 ├── server.py
 ├── sistem.conf
-├── /css
-│   └── style.css
-├── /javascript
+├── /static
+│   └──/css
+├── /
 │   └── script.js
 └── /templates
     └── index.html

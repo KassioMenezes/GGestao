@@ -4,11 +4,11 @@ from flask import Flask, request, redirect, url_for, session, render_template
 import mysql.connector
 import hashlib
 
+
 app = Flask(__name__)
-app.secret_key = 'seu-segredo-super-seguro'  # Troque por uma chave secreta real
+app.secret_key = '$2a$12$JEgjBbujv4t9dMfxZkocbO5V93mjUMMMMXsTvzzY0uqG5KzVQGucy'
 
 
-# Função para ler as configurações do sistem.conf
 def load_config():
     config = configparser.ConfigParser()
     config.read('sistem.conf')
@@ -21,7 +21,6 @@ def load_config():
         'password': db_config.get('password'),
     }
 
-# Conectar ao banco de dados MySQL
 def connect_to_database():
     db_config = load_config()
     return mysql.connector.connect(
@@ -34,7 +33,7 @@ def connect_to_database():
 
 @app.route('/')
 def index():
-    if 'user_id' in session:  # Se a sessão estiver ativa, redireciona para menu
+    if 'user_id' in session:
         return redirect(url_for('menu'))
     return render_template('index.html')
 
@@ -43,10 +42,8 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    # Cria o hash MD5 da senha fornecida
     hashed_password = hashlib.md5(password.encode()).hexdigest()
 
-    # Conecta ao banco de dados e verifica as credenciais
     connection = connect_to_database()
     cursor = connection.cursor()
     query = "SELECT USU_COD FROM USUARIO WHERE USU_USUARIO = %s AND USU_SENHA_HASH = %s"
@@ -54,19 +51,71 @@ def login():
     user = cursor.fetchone()
     connection.close()
 
-    if user:  # Se o usuário for encontrado
-        session['user_id'] = user[0]  # Salva o ID do usuário na sessão
+    if user:  
+        session['user_id'] = user[0] 
         return redirect(url_for('menu'))
     else:
         return render_template('index.html', error='Usuário ou senha inválidos')
 
 @app.route('/menu')
 def menu():
-    if 'user_id' not in session:  # Bloqueia o acesso se a sessão não estiver ativa
+    if 'user_id' not in session: 
         return redirect(url_for('index'))
     return render_template('menu.html')
 
-@app.route('/logout')
+@app.route('/novaSenha')
+def novaSenha():
+    return render_template('novaSenha.html')
+
+@app.route('/novoUsuarioSistema')
+def novoUsuarioSistema():
+    return render_template('addUsuario.html')
+
+
+@app.route('/addUsuario', methods=['GET', 'POST'])
+def add_usuario():
+    if 'user_id' not in session:  # Bloqueia o acesso se a sessão não estiver ativa
+        return redirect(url_for('index'))
+    
+    mensagem = ''  # Inicializa a variável de mensagem
+
+    if request.method == 'POST':
+        # Coleta os dados do formulário
+        nome = request.form['nome']
+        usuario = request.form['usuario']
+        senha = request.form['senha']
+        status = request.form.get('status', 'Pendente')  # Define o status como 'Pendente' por padrão
+
+        try:
+            # Criptografa a senha com MD5
+            hashed_password = hashlib.md5(senha.encode('utf-8')).hexdigest()  # Gera o hash MD5 da senha
+
+            # Conecta ao banco de dados
+            connection = connect_to_database()
+            cursor = connection.cursor()
+
+            # Insere o novo usuário no banco de dados
+            query = """
+                INSERT INTO USUARIO (USU_USUARIO, USU_SENHA_HASH, USU_STATU)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(query, (usuario, hashed_password, status))
+            connection.commit()
+
+            # Fecha a conexão
+            connection.close()
+
+            # Define a mensagem de sucesso
+            mensagem = 'Usuário cadastrado com sucesso!'
+        except Exception as e:
+            # Em caso de erro, define uma mensagem de erro
+            mensagem = f'Ocorreu um erro: {str(e)}'
+
+    # Retorna o template e inclui a mensagem no contexto
+    return render_template('addUsuario.html', mensagem=mensagem)
+
+
+@app.route('/sair')
 def logout():
     session.pop('user_id', None)  # Remove o usuário da sessão
     return redirect(url_for('index'))
