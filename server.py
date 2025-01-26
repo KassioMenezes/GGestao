@@ -114,6 +114,11 @@ def add_usuario():
     # Retorna o template e inclui a mensagem no contexto
     return render_template('addUsuario.html', mensagem=mensagem)
 
+@app.route('/novoCliente')
+def novoCliente():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redireciona para a página de login
+    return render_template('addCliente.html')
 
 @app.route('/sair')
 def logout():
@@ -121,4 +126,4 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
