@@ -120,6 +120,12 @@ def novoCliente():
         return redirect(url_for('login'))  # Redireciona para a página de login
     return render_template('addCliente.html')
 
+@app.route('/novoFornecedor')
+def novoFornecedor():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redireciona para a página de login
+    return render_template('addFornecedor.html')
+
 @app.route('/sair')
 def logout():
     session.pop('user_id', None)  # Remove o usuário da sessão

@@ -1,0 +1,46 @@
+1. Informações Gerais do Fornecedor
+FOR_COD: Código único do fornecedor (identificador da tabela).
+FOR_CNPJ: CNPJ (para pessoa jurídica). Se for pessoa física, o campo seria o CPF.
+FOR_NOME: Nome completo ou razão social do fornecedor.
+FOR_NOME_FANTASIA: Nome fantasia (caso aplicável para pessoa jurídica).
+FOR_TIPO: Tipo de fornecedor (por exemplo, pessoa física, pessoa jurídica, MEI, etc.).
+FOR_RAZAO_SOCIAL: Caso não esteja no campo FOR_NOME, a razão social pode ser uma informação separada.
+2. Informações de Contato
+FOR_EMAIL: Endereço de email.
+FOR_TELEFONE: Telefone de contato.
+FOR_WHATSAPP: Se aplicável, o número de WhatsApp pode ser incluído como uma forma rápida de comunicação.
+FOR_FAX: Embora menos utilizado hoje, alguns fornecedores ainda podem fornecer um número de fax.
+3. Endereço Completo
+FOR_ENDERECO: Endereço completo.
+FOR_BAIRRO: Bairro.
+FOR_CIDADE: Cidade.
+FOR_ESTADO: Estado.
+FOR_CEP: Código Postal (CEP).
+4. Dados Bancários
+FOR_BANCO: Nome do banco.
+FOR_AGENCIA: Número da agência bancária.
+FOR_CONTA_BANCARIA: Número da conta bancária.
+FOR_TIPO_CONTA: Tipo de conta (corrente, poupança, etc.).
+5. Documentos Legais e Fiscais
+FOR_INSCRICAO_ESTADUAL: Inscrição estadual (para fornecedores com CNPJ e que atuam em determinado estado).
+FOR_INSCRICAO_MUNICIPAL: Inscrição municipal (para fornecedores de serviços no município).
+FOR_REGISTRO: Número de registro junto à entidade regulamentadora (se aplicável, como CREA, CRM, etc.).
+6. Informações Comerciais
+FOR_CNAE: Código Nacional de Atividades Econômicas, para indicar o ramo de atividade do fornecedor.
+FOR_CONDICAO_PAGAMENTO: Condições de pagamento acordadas (à vista, 30 dias, etc.).
+FOR_DESCONTO: Desconto concedido para compras de grande volume ou negociação.
+FOR_PRAZO_ENTREGA: Prazo de entrega médio ou acordado para os produtos/serviços fornecidos.
+7. Responsável e Documentação Interna
+FOR_RESPONSAVEL: Nome do responsável pelo relacionamento comercial.
+FOR_CARGO_RESPONSAVEL: Cargo do responsável no fornecedor.
+FOR_TERMO_ACEITO: Flag indicando se o fornecedor aceitou os termos e condições.
+FOR_OBS: Observações adicionais (campo livre para qualquer informação relevante sobre o fornecedor).
+8. Status e Histórico
+FOR_ATIVO: Flag para determinar se o fornecedor está ativo ou inativo.
+FOR_DATA_CRIACAO: Data de quando o cadastro foi criado no sistema.
+FOR_DATA_ULTIMA_ATUALIZACAO: Data da última atualização das informações do fornecedor.
+FOR_COMENTARIOS: Comentários ou histórico de interações com o fornecedor.
+9. Outras Informações Relevantes
+FOR_TIPO_EMPRESA: Pequena, média ou grande empresa (dependendo do porte).
+FOR_TEM_CERTIFICACAO: Se o fornecedor possui alguma certificação (ex: ISO, segurança alimentar, etc.).
+FOR_RECOMENDACOES: Caso haja avaliações ou recomendações de outros clientes/empresas.
