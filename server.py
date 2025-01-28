@@ -1,6 +1,6 @@
 import os
 import configparser
-from flask import Flask, request, redirect, url_for, session, render_template
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import mysql.connector
 import hashlib
 
@@ -125,6 +125,74 @@ def novoFornecedor():
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Redireciona para a página de login
     return render_template('addFornecedor.html')
+
+@app.route('/relUsuario')
+def relUsuario():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redireciona para a página de login
+    
+    # Conectar ao banco de dados e buscar os usuários
+    connection = connect_to_database()
+    cursor = connection.cursor()
+    cursor.execute("SELECT USU_COD, USU_USUARIO, USU_STATU, USU_NIVEL FROM USUARIO")
+    usuarios = cursor.fetchall()
+    connection.close()
+    
+    # Enviar os dados para o template
+    return render_template('relUsuario.html', usuarios=usuarios)
+
+@app.route('/deletarUsuario/<int:user_id>', methods=['DELETE'])
+def deletarUsuario(user_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    connection = connect_to_database()
+    cursor = connection.cursor()
+    try:
+        cursor.execute("DELETE FROM USUARIO WHERE USU_COD = %s", (user_id,))
+        connection.commit()
+        return jsonify({"message": "Usuário excluído com sucesso"}), 200
+    except Exception as e:
+        connection.rollback()
+        return jsonify({"error": "Erro ao excluir usuário", "details": str(e)}), 500
+    finally:
+        connection.close()
+
+
+@app.route('/editarUsuario/<int:user_id>', methods=['GET', 'POST'])
+def editarUsuario(user_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    connection = connect_to_database()
+    cursor = connection.cursor()
+    
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        status = request.form['status']
+        nivel = request.form['nivel']
+
+        try:
+            cursor.execute("""
+                UPDATE USUARIO
+                SET USU_USUARIO = %s, USU_STATU = %s, USU_NIVEL = %s
+                WHERE USU_COD = %s
+            """, (usuario, status, nivel, user_id))
+            connection.commit()
+            return redirect(url_for('relUsuario'))
+        except Exception as e:
+            connection.rollback()
+            return f"Erro ao atualizar usuário: {e}"
+        finally:
+            connection.close()
+    
+    # Para o método GET, buscar dados do usuário
+    cursor.execute("SELECT USU_COD, USU_USUARIO, USU_STATU, USU_NIVEL FROM USUARIO WHERE USU_COD = %s", (user_id,))
+    usuario = cursor.fetchone()
+    connection.close()
+
+    return render_template('editarUsuario.html', usuario=usuario)
+
 
 @app.route('/sair')
 def logout():
